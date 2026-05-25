@@ -1,0 +1,70 @@
+{
+  "incident_id": "INC-2024-001",
+  "source": "datadog",
+  "alerts": [
+    {
+      "source": "datadog",
+      "severity": "critical",
+      "service": "postgres-primary",
+      "message": "Database connection timeout spike detected",
+      "timestamp": "2026-05-25T13:10:00Z"
+    },
+    {
+      "source": "datadog",
+      "severity": "critical",
+      "service": "payment-svc",
+      "message": "500 error rate exceeded threshold",
+      "timestamp": "2026-05-25T13:11:00Z"
+    },
+    {
+      "source": "datadog",
+      "severity": "warning",
+      "service": "gateway-01",
+      "message": "Latency increasing above SLA",
+      "timestamp": "2026-05-25T13:12:00Z"
+    }
+  ],
+  "logs": [
+    {
+      "service": "postgres-primary",
+      "level": "error",
+      "message": "Connection pool exhausted",
+      "timestamp": "2026-05-25T13:10:05Z"
+    },
+    {
+      "service": "payment-svc",
+      "level": "error",
+      "message": "Database query timeout",
+      "timestamp": "2026-05-25T13:11:12Z"
+    },
+    {
+      "service": "gateway-01",
+      "level": "warning",
+      "message": "Upstream payment service degraded",
+      "timestamp": "2026-05-25T13:12:33Z"
+    }
+  ],
+  "metrics": {
+    "postgres-primary": {
+      "cpu_percent": 97.0,
+      "memory_percent": 89.0,
+      "latency_ms": 2400,
+      "error_rate": 22.0,
+      "active_connections": 540
+    },
+    "payment-svc": {
+      "cpu_percent": 71.0,
+      "memory_percent": 63.0,
+      "latency_ms": 1800,
+      "error_rate": 35.0,
+      "active_connections": 210
+    },
+    "gateway-01": {
+      "cpu_percent": 52.0,
+      "memory_percent": 48.0,
+      "latency_ms": 950,
+      "error_rate": 12.0,
+      "active_connections": 320
+    }
+  }
+}
