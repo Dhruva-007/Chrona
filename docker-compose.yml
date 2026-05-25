@@ -1,0 +1,33 @@
+services:
+  memgraph:
+    image: memgraph/memgraph:latest
+    container_name: chrona-memgraph
+    entrypoint: [
+      "/usr/lib/memgraph/memgraph",
+      "--bolt-port=7687",
+      "--bolt-server-name-for-init=Neo4j/5.11.0",
+      "--log-level=WARNING",
+      "--also-log-to-stderr=true"
+    ]
+    ports:
+      - "7687:7687"
+    volumes:
+      - memgraph_data:/var/lib/memgraph
+      - memgraph_log:/var/log/memgraph
+    restart: unless-stopped
+
+  memgraph-lab:
+    image: memgraph/lab:latest
+    container_name: chrona-memgraph-lab
+    ports:
+      - "3001:3000"
+    environment:
+      - QUICK_CONNECT_MG_HOST=memgraph
+      - QUICK_CONNECT_MG_PORT=7687
+    depends_on:
+      - memgraph
+    restart: unless-stopped
+
+volumes:
+  memgraph_data:
+  memgraph_log:
