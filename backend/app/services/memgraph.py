@@ -23,7 +23,7 @@ def get_driver() -> Driver:
             auth=auth,
             max_connection_pool_size=10,
             connection_timeout=10,
-            encrypted=False,
+            encrypted=True,
         )
         logger.info(f"Memgraph driver created → {settings.MEMGRAPH_URI}")
     return _driver
